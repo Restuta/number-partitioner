@@ -43,6 +43,8 @@ let cache = Cache.init();
   //by re-using same arrays and objects (immutableJS?)
 function p(n,m) {
 
+  //console.log(`p(${n},${m})`);
+
   var cacheKey = n.toString() + m.toString(); //ineffective key creation
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey);
@@ -89,16 +91,11 @@ function measureTime(funcToMeasure) {
   return stop - start;
 }
 
-//console.log('10: ' + measureTime(() => p(10,10)) + 'ms')
-// console.log('20: ' + measureTime(() => p(20,20)) + 'ms')
-// console.log('30: ' + measureTime(() => p(30,30)) + 'ms')
-//console.log('40: ' + measureTime(() => p(40,40)) + 'ms')
-// console.log('50: ' + measureTime(() => p(50,50)) + 'ms')
 console.log('calculating....')
-let number = 10;
+let number = 60;
 console.log(`${number}: ` + measureTime(() => p(number,number)) + 'ms');
-console.log('objects in cache: ' + Object.keys(cache).length);
- //console.log(cache);
+//console.log('objects in cache: ' + Object.keys(cache).length);
+console.log('cache hits: ' + cache.hits);
 // console.log('61: ' + measureTime(() => p(61,61)) + 'ms')
 // console.log('62: ' + measureTime(() => p(62,62)) + 'ms')
 // console.log('63: ' + measureTime(() => p(63,63)) + 'ms')
