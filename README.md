@@ -1,5 +1,5 @@
 # Gernerates partitions for positive interger
-See [Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory))) for more info.
+See [Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory)) for more info.
 
 e.g. partitions of 8 are:
 ```
@@ -28,3 +28,5 @@ e.g. partitions of 8 are:
     [1, 1, 1, 1, 1, 1, 1, 1]
 ]
 ```
+
+Currently able to generate partions for 1..65 (after that it usually fails with out of memory exception).Number of partitions grows exponentially, it takes a lot of memory. Uses caching and can be optimized further to reduce memory footprint by several times.
