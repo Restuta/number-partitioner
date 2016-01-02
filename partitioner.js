@@ -1,10 +1,6 @@
 import _ from 'lodash';
 import Cache from './cache';
 
-function ones(numberOfOnes) {
-  return Array.from({length: numberOfOnes}, () => 1);
-}
-
 /*
   recursive algorythm has the following structure:
 
@@ -35,6 +31,9 @@ function ones(numberOfOnes) {
   //m E p(n-m, n-m) U p(n, m-1)
 */
 
+function ones(numberOfOnes) {
+  return Array.from({length: numberOfOnes}, () => 1);
+}
 
 let cache = Cache.init();
 
@@ -42,10 +41,8 @@ let cache = Cache.init();
   //by assining number of occurences for particular number so [1,1,1,1,1] becomes[{1:5}] (1 five times)
   //by re-using same arrays and objects (immutableJS?)
 function p(n,m) {
-
-  //console.log(`p(${n},${m})`);
-
   var cacheKey = n.toString() + m.toString(); //ineffective key creation
+  
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey);
   }
@@ -81,35 +78,6 @@ function p(n,m) {
     return result;
   }
 }
-
-//measures execution time in ms
-function measureTime(funcToMeasure) {
-  let start = +new Date();
-  funcToMeasure();
-  let stop = +new Date();
-
-  return stop - start;
-}
-
-console.log('calculating....')
-let number = 60;
-console.log(`${number}: ` + measureTime(() => p(number,number)) + 'ms');
-//console.log('objects in cache: ' + Object.keys(cache).length);
-console.log('cache hits: ' + cache.hits);
-// console.log('61: ' + measureTime(() => p(61,61)) + 'ms')
-// console.log('62: ' + measureTime(() => p(62,62)) + 'ms')
-// console.log('63: ' + measureTime(() => p(63,63)) + 'ms')
-// console.log('64: ' + measureTime(() => p(64,64)) + 'ms')
-//console.log('70: ' + measureTime(() => p(70,70)) + 'ms')
-//console.log('73: ' + measureTime(() => p(73,73)) + 'ms')
-//console.log('74: ' + measureTime(() => p(74,74)) + 'ms')
-// console.log('77: ' + measureTime(() => p(77,77)) + 'ms')
-// console.log('80: ' + measureTime(() => p(80,80)) + 'ms')
-// console.log('90: ' + measureTime(() => p(90,90)) + 'ms')
-//console.log('62: ' + measureTime(() => p(62,62)) + 'ms')
-console.log('done');
-console.log('---');
-
 
 export default (number) => {
   return p(number, number);
