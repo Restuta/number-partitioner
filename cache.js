@@ -25,20 +25,19 @@ const SimpleObjectCache = {
 
 const ImmutableListCache = {
   init() {
-    //let map = Immutable.Map();
+    let map = Immutable.Map();
 
     return {
       hits: 0,
-      map: Immutable.Map(),
       set(key, value) {
-        this.map = this.map.set(key, value);
+        map = map.set(key, value);
       },
       get(key) {
         this.hits++;
-        return this.map.get(key);
+        return map.get(key);
       },
       has(key) {
-        return this.map.has(key);
+        return map.has(key);
       }
     }
   }
@@ -46,5 +45,5 @@ const ImmutableListCache = {
 
 
 
-export default SimpleObjectCache;
-//export default ImmutableListCache;
+//export default SimpleObjectCache;
+export default ImmutableListCache;
