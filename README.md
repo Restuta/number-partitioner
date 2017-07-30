@@ -1,4 +1,4 @@
-# Gernerates partitions for positive interger
+# Generates partitions for positive interger
 See [Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory)) for more info.
 
 e.g. partitions of 8 are:
