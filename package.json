@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url" : "git+https://github.com/Restuta/number-partitioner"
+    "url": "git+https://github.com/Restuta/number-partitioner"
   },
   "author": "Anton Vynogradenko <restuta8@gmail.com> (http://restuta.me)",
   "license": "ISC",

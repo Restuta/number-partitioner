@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import Cache from './cache';
+const Cache = require("./cache");
 
 /*
   recursive algorythm has the following structure:
@@ -32,17 +31,17 @@ import Cache from './cache';
 */
 
 function ones(numberOfOnes) {
-  return Array.from({length: numberOfOnes}, () => 1);
+  return Array.from({ length: numberOfOnes }, () => 1);
 }
 
 let cache = Cache.init();
 
 //memory use can be optimized in two ways
-  //by assining number of occurences for particular number so [1,1,1,1,1] becomes[{1:5}] (1 five times)
-  //by re-using same arrays and objects (immutableJS?)
-function p(n,m) {
+//by assining number of occurences for particular number so [1,1,1,1,1] becomes[{1:5}] (1 five times)
+//by re-using same arrays and objects (immutableJS?)
+function p(n, m) {
   var cacheKey = n.toString() + m.toString(); //ineffective key creation
-  
+
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey);
   }
@@ -55,30 +54,30 @@ function p(n,m) {
 
   //p(n,m) = n U p(n, n-1)
   if (n === m) {
-    let result = [[n]].concat(p(n, n-1));
+    let result = [[n]].concat(p(n, n - 1));
     cache.set(cacheKey, result);
     return result; //n U p(n, n-1)
   }
 
   //p(n,m) = m E p(n-m, m) U p(n, m-1)
-  if (n >= 2*m) {
-    let result = p(n-m, m).map(x => [m].concat(x)) //m E p(n-m, m)
-      .concat(p(n, m-1));  //... U p(n, m-1)
+  if (n >= 2 * m) {
+    let result = p(n - m, m)
+      .map(x => [m].concat(x)) //m E p(n-m, m)
+      .concat(p(n, m - 1)); //... U p(n, m-1)
 
     cache.set(cacheKey, result);
     return result;
   }
 
   //p(n,m) = m E p(n-m, n-m) U p(n, m-1)
-  if (n > m && n < 2*m) {
-    let result =  p(n-m, n-m).map(x =>[m].concat(x)) //m E p(n-m, n-m)
-      .concat(p(n, m-1)); //... U p(n, m-1)
+  if (n > m && n < 2 * m) {
+    let result = p(n - m, n - m)
+      .map(x => [m].concat(x)) //m E p(n-m, n-m)
+      .concat(p(n, m - 1)); //... U p(n, m-1)
 
     cache.set(cacheKey, result);
     return result;
   }
 }
 
-export default (number) => {
-  return p(number, number);
-}
+module.exports = number => p(number, number);

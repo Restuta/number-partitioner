@@ -1,5 +1,4 @@
-import Immutable from 'immutable';
-
+const Immutable = require("immutable");
 
 const SimpleObjectCache = {
   init() {
@@ -17,11 +16,9 @@ const SimpleObjectCache = {
       has(key) {
         return !!cache[key];
       }
-    }
+    };
   }
 };
-
-
 
 const ImmutableListCache = {
   init() {
@@ -39,11 +36,9 @@ const ImmutableListCache = {
       has(key) {
         return map.has(key);
       }
-    }
+    };
   }
-}
-
-
+};
 
 //export default SimpleObjectCache;
-export default ImmutableListCache;
+module.exports = ImmutableListCache;
